@@ -1,10 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const index = require('./routes/index');
-const userRoute = require('./routes/userRoute');
 
 const app = express();
-const router = express.Router();
+const index = require('./routes/index');
+const userRoute = require('./routes/userRoute');
 
 const mongoose = require('mongoose');
 const config = require('../configs/config');
@@ -39,5 +38,6 @@ app.use(bodyParser.json())
 app.use('/', index);
 app.use('/user', userRoute);
 
+app.listen(3000);
 module.exports = app;
 
