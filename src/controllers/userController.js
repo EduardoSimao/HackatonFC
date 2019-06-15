@@ -3,8 +3,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const config = require('../../configs/config');
 const auth = require('../controllers/auth');
-const request = require("request");
-const jtw = require('jsonwebtoken');
 
 
 const createUserToken = (userEmail) =>{
@@ -17,7 +15,7 @@ exports.getUser = (async (req, res) => {
 
         if(!token) return res.status(401).send({error: 'Você precisa fazer a autenticação!'});
 
-        jtw.verify(token, config.secret_key, (err, decoded) =>{
+        jwt.verify(token, config.secret_key, (err, decoded) =>{
             if(err) return res.status(401).send({error: 'Token Invalida!'});
             res.locals.auth_data = decoded;
             console.log( res.locals.auth_data)
@@ -42,16 +40,6 @@ exports.createUser = (async (req, res) =>{
 
         const user = await Users.create(req.body);
         user.password = undefined;
-
-        var data = {form: {
-            token: 'xoxp-666280868949-666278966880-654897869922-8cfb7d2ab6afc85411784651729a0790',
-            channel: "#entretenimento",
-            text: "Hi! :wave: \n Welcome @" + user.name
-          }};
-            request.post('https://slack.com/api/chat.postMessage', data, function (error, response, body) {
-            // Sends welcome message
-            res.json();
-          });
 
         return res.status(201).send({user, token: createUserToken(user.email)});
 

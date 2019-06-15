@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const index = require('./routes/index');
 const userRoute = require('./routes/userRoute');
+const eventoRoute = require('./routes/eventoRouter');
 
 const mongoose = require('mongoose');
 const config = require('../configs/config');
@@ -37,6 +38,7 @@ app.use(bodyParser.json())
 
 app.use('/', index);
 app.use('/user', userRoute);
+app.use('/evento', eventoRoute);
 
 app.listen(3000);
 module.exports = app;
