@@ -16,9 +16,9 @@ exports.getAllEventos = ( async (req, res) =>{
 })
 
 exports.createEvento = (async (req, res) =>{
-    const {tipo, desc} = req.body;
+    const {tipo, desc, DataInicial, DataFinal} = req.body;
 
-    if(!tipo || !desc) return res.status(400).send({error: 'Dados incompletos!'});
+    if(!tipo || !desc || !DataInicial || !DataFinal) return res.status(400).send({error: 'Dados incompletos!'});
 
     try{
         const token = req.headers.auth;
