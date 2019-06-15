@@ -6,7 +6,8 @@ const config = () => {
         return {
             url_db: 'mongodb+srv://admin:admin123@clusternodejs-ipi3l.mongodb.net/test?retryWrites=true',
             secret_key: 'superSecreto',
-            token_time: '7d'
+            token_time: '7d',
+            slack_token: ''
         }
     }
 }
